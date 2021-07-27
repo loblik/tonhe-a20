@@ -10,7 +10,8 @@ all: build upload
 
 build:
 	$(COMPILE) -c $(FILENAME).c -o $(FILENAME).o
-	$(COMPILE) -o $(FILENAME).elf $(FILENAME).o
+	$(COMPILE) -c i2c.c
+	$(COMPILE) -o $(FILENAME).elf $(FILENAME).o i2c.o
 	avr-objcopy -j .text -j .data -O ihex $(FILENAME).elf $(FILENAME).hex
 	avr-size --format=avr --mcu=$(DEVICE) $(FILENAME).elf
 
